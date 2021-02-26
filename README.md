@@ -1,24 +1,59 @@
-# README
+## usersテーブル 
+| Culumn             | Type   | Options                   | 
+| ------------------ | ------ | ------------------------- | 
+| nickname           | string | null: false               | 
+| email              | string | null: false, unique: true | 
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birthday           | date   | null: false               |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Associstion
+- has_many :items
+- has_many :purchases
 
-Things you may want to cover:
+## itemsテーブル
+| Culumn           | Type          | Options                        | 
+| ---------------- | ------------- | ------------------------------ | 
+| name             | string        | null: false                    | 
+| contents         | text          | null: false                    |
+| category_id      | integer       | null: false                    |
+| status_id        | integer       | null: false                    |
+| delivery_fee_id  | integer       | null: false                    |
+| first_address_id | integer       | null: false                    |
+| delivery_day_id  | integer       | null: false                    |
+| price            | integer       | null: false                    |
+| user             | references    | null: false, foreign_key: true |
 
-* Ruby version
 
-* System dependencies
+##Associstion
+- has_one    :purchase
+- belongs_to :user
 
-* Configuration
+## purchasesテーブル
+| Culumn    | Type       | Options                        | 
+| --------- | ---------- | -------------------------------| 
+| item      | references | null: false, foreign_key: true |
+| user      | references | null: false, foreign_key: true |
 
-* Database creation
+##Associstion
+- belongs_to :item
+- belongs_to :user
+- has_one    :address
 
-* Database initialization
+## addresssテーブル
+| Culumn            | Type       | Options                        | 
+| ----------------- | ---------- | ------------------------------ | 
+| postal_code       | string     | null: false                    | 
+| first_address_id  | integer    | null: false                    | 
+| second_address    | string     | null: false                    | 
+| third_address     | string     | null: false                    | 
+| fourth_address    | string     |                                | 
+| telephone         | string     | null: false                    | 
+| purchase          | references | null: false, foreign_key: true | 
 
-* How to run the test suite
+##Associstion
+- belongs_to :purchase
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
