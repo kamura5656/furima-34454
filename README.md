@@ -15,28 +15,27 @@
 - has_many :purchases
 
 ## itemsテーブル
-| Culumn           | Type          | Options     | 
-| --------------   | ------------- | ----------- | 
-| items_name       | string        | null: false | 
-| contents         | text          | null: false |
-| category_id      | integer       | null: false |
-| status_id        | integer       | null: false |
-| delivery_fee_id  | integer       | null: false |
-| from_id          | integer       | null: false |
-| delivery_days_id | integer       | null: false |
-| price            | integer       | null: false |
-| user             | references    | null: false |
+| Culumn           | Type          | Options                        | 
+| ---------------- | ------------- | ------------------------------ | 
+| items_name       | string        | null: false                    | 
+| contents         | text          | null: false                    |
+| category_id      | integer       | null: false                    |
+| status_id        | integer       | null: false                    |
+| delivery_fee_id  | integer       | null: false                    |
+| first_address_id | integer       | null: false                    |
+| delivery_days_id | integer       | null: false                    |
+| price            | integer       | null: false                    |
+| user             | references    | null: false, foreign_key: true |
 
 ##Associstion
 - has_one :purchase
 - belongs_to :user
 
 ## purchasesテーブル
-| Culumn    | Type       | Options     | 
-| --------- | ---------- | ----------- | 
-| item      | references | null: false | 
-| user      | references | null: false | 
-| address   | references | null: false | 
+| Culumn    | Type       | Options                        | 
+| --------- | ---------- | -------------------------------| 
+| item      | references | null: false, foreign_key: true |
+| user      | references | null: false, foreign_key: true |
 
 ##Associstion
 - belongs_to :item
@@ -46,12 +45,13 @@
 ## addresssテーブル
 | Culumn            | Type       | Options     | 
 | ----------------- | ---------- | ----------- | 
-| postal_code       | integer    | null: false | 
+| purchase_id       | integer    | null: false | 
+| postal_code       | string     | null: false | 
 | first_address_id  | integer    | null: false | 
 | second_address    | string     | null: false | 
 | third_address     | string     | null: false | 
 | fourth_address    | string     |             | 
-| telephone         | integer    | null: false | 
+| telephone         | string     | null: false | 
 
 ##Associstion
 - belongs_to :purchase
