@@ -34,27 +34,27 @@ RSpec.describe Item, type: :model do
       it 'categoryが選択されていないと登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it 'statusが選択されていないと登録できない' do
         @item.status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status must be other than 1")
+        expect(@item.errors.full_messages).to include('Status must be other than 1')
       end
       it 'delivery_feeが選択されていないと登録できない' do
         @item.delivery_fee_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery fee must be other than 1")
+        expect(@item.errors.full_messages).to include('Delivery fee must be other than 1')
       end
       it 'first_addressが選択されていないと登録できない' do
         @item.first_address_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("First address must be other than 1")
-      end    
-        it 'delivery_dayが選択されていないと登録できない' do
+        expect(@item.errors.full_messages).to include('First address must be other than 1')
+      end
+      it 'delivery_dayが選択されていないと登録できない' do
         @item.delivery_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery day must be other than 1")
+        expect(@item.errors.full_messages).to include('Delivery day must be other than 1')
       end
 
       it 'priceが空では登録できない' do
@@ -65,17 +65,17 @@ RSpec.describe Item, type: :model do
       it 'priceが300未満では登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
       it 'priceが10000000以上では登録できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
       it 'priceが全角では登録できない' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'ユーザーが紐付いていなければ投稿できない' do
         @item.user = nil

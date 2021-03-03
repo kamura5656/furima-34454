@@ -21,13 +21,12 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(
-       :name, :contents,  :category_id, :status_id, :delivery_fee_id,
-       :delivery_day_id, :first_address_id, :price, :image).merge(user_id: current_user.id)
+      :name, :contents, :category_id, :status_id, :delivery_fee_id,
+      :delivery_day_id, :first_address_id, :price, :image
+    ).merge(user_id: current_user.id)
   end
 
   def move_to_index
-    unless user_signed_in? 
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless user_signed_in?
   end
 end

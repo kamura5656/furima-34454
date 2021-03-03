@@ -12,12 +12,12 @@ class Item < ApplicationRecord
     validates :name
     validates :contents
     validates :image
-    validates :category_id        , numericality: { other_than: 1 }
-    validates :status_id          , numericality: { other_than: 1 }
-    validates :delivery_fee_id    , numericality: { other_than: 1 }
-    validates :delivery_day_id    , numericality: { other_than: 1 }
-    validates :first_address_id   , numericality: { other_than: 1 }
-    validates :price              , numericality: { only_integer: true}
-    validates_inclusion_of :price ,               {in: 300..9_999_999}       
+    validates :category_id, numericality: { other_than: 1 }
+    validates :status_id, numericality: { other_than: 1 }
+    validates :delivery_fee_id, numericality: { other_than: 1 }
+    validates :delivery_day_id, numericality: { other_than: 1 }
+    validates :first_address_id, numericality: { other_than: 1 }
+    validates :price, numericality: { only_integer: true }
+    validates_inclusion_of :price, { in: 300..9_999_999 }
   end
 end
