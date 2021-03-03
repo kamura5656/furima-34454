@@ -103,12 +103,12 @@ RSpec.describe User, type: :model do
       it 'last_nameが全角漢字、ひらがな、カタカナでないと登録できない' do
         @user.last_name = 'aaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name is invalid")
+        expect(@user.errors.full_messages).to include('Last name is invalid')
       end
       it 'first_nameが全角漢字、ひらがな、カタカナでないと登録できない' do
         @user.first_name = 'aaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name is invalid")
+        expect(@user.errors.full_messages).to include('First name is invalid')
       end
       it 'last_nameがカタカナでないと登録できない' do
         @user.last_name_kana = 'ああああ'
