@@ -72,12 +72,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
-      it 'priceが全角では登録できない' do
+      it 'priceが全角数字では登録できない' do
         @item.price = '３００'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
-      it 'ユーザーが紐付いていなければ投稿できない' do
+      it 'priceが半角英数字混合では出品できない' do
+        @item.price = 'aaa111'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end 
+      it 'priceが半角英字のみでは出品できない' do
+        @item.price = 'aaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+      it 'priceが全角文字では出品できない' do
+        @item.price = 'あああ'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+
+      it 'ユーザーが紐付いていなければ出品できない' do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
