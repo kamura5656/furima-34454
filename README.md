@@ -10,7 +10,7 @@
 | first_name_kana    | string | null: false               |
 | birthday           | date   | null: false               |
 
-##Associstion
+##Associstion　
 - has_many :items
 - has_many :purchases
 
