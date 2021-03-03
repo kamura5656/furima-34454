@@ -125,7 +125,7 @@
     <h2 class='title'>ピックアップカテゴリー</h2>
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
-      <% if @items_id.blank?   %>
+      <% unless @items.empty?   %>
         <%= render partial: 'item', collection: @items %>
         <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
         <%# 商品がある場合は表示されないようにしましょう %>
