@@ -43,7 +43,7 @@
 - belongs_to :user
 - has_one    :address
 
-## addresssテーブル
+## addressesテーブル
 | Culumn            | Type       | Options                        | 
 | ----------------- | ---------- | ------------------------------ | 
 | postal_code       | string     | null: false                    | 
