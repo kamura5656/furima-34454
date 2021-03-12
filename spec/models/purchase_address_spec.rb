@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe PurchaseAddress, type: :model do
   before do
-    @item = FactoryBot.build(:item) 
+    @item = FactoryBot.build(:item)
     @item.image = fixture_file_upload('app/assets/images/comment.png')
     @item.save
 
-    @user = FactoryBot.create(:user) 
+    @user = FactoryBot.create(:user)
 
     @PurchaseAddress = FactoryBot.build(:PurchaseAddress, item_id: @item.id, user_id: @user.id)
   end
@@ -27,12 +27,12 @@ RSpec.describe PurchaseAddress, type: :model do
       it '郵便番号にハイフンがなければ購入できない' do
         @PurchaseAddress.postal_code = '0000000'
         @PurchaseAddress.valid?
-        expect(@PurchaseAddress.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@PurchaseAddress.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it '郵便番号が全角では購入できない' do
         @PurchaseAddress.postal_code = '０００-００００'
         @PurchaseAddress.valid?
-        expect(@PurchaseAddress.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)" )
+        expect(@PurchaseAddress.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
 
       it '都道府県名が選択されていないと購入できない' do
@@ -58,13 +58,12 @@ RSpec.describe PurchaseAddress, type: :model do
       it '電話番号が全角では購入できない' do
         @PurchaseAddress.telephone = '０００００００００００'
         @PurchaseAddress.valid?
-        expect(@PurchaseAddress.errors.full_messages).to include("Telephone is invalid")
-
+        expect(@PurchaseAddress.errors.full_messages).to include('Telephone is invalid')
       end
       it '電話番号が11桁以内でないと購入できない' do
         @PurchaseAddress.telephone = '000000000000'
         @PurchaseAddress.valid?
-        expect(@PurchaseAddress.errors.full_messages).to include("Telephone is invalid")
+        expect(@PurchaseAddress.errors.full_messages).to include('Telephone is invalid')
       end
       it 'クレジットカード情報が空では購入できない' do
         @PurchaseAddress.token = ''
@@ -72,12 +71,12 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@PurchaseAddress.errors.full_messages).to include("Token can't be blank")
       end
 
-      it 'ユーザーが紐付いていなければ出品できない' do
+      it '購入操作にユーザーが紐付いていなければ出品できない' do
         @PurchaseAddress.user_id = nil
         @PurchaseAddress.valid?
         expect(@PurchaseAddress.errors.full_messages).to include("User can't be blank")
       end
-      it '商品が紐付いていなければ出品できない' do
+      it '購入操作に商品が紐付いていなければ出品できない' do
         @PurchaseAddress.item_id = nil
         @PurchaseAddress.valid?
         expect(@PurchaseAddress.errors.full_messages).to include("Item can't be blank")
