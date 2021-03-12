@@ -16,6 +16,10 @@ RSpec.describe PurchaseAddress, type: :model do
       it '郵便番号、住所、電話番号、クレジットカード情報が入力されていれば購入できる' do
         expect(@PurchaseAddress).to be_valid
       end
+      it '建物番号は入力されていなくても購入できる' do
+        @PurchaseAddress.fourth_address = ''
+        expect(@PurchaseAddress).to be_valid
+      end
     end
 
     context '購入できない時' do
@@ -57,6 +61,11 @@ RSpec.describe PurchaseAddress, type: :model do
       end
       it '電話番号が全角では購入できない' do
         @PurchaseAddress.telephone = '０００００００００００'
+        @PurchaseAddress.valid?
+        expect(@PurchaseAddress.errors.full_messages).to include('Telephone is invalid')
+      end
+      it '電話番号が英字交じりでは購入できない' do
+        @PurchaseAddress.telephone = 'aaaaa000000'
         @PurchaseAddress.valid?
         expect(@PurchaseAddress.errors.full_messages).to include('Telephone is invalid')
       end

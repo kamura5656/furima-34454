@@ -11,7 +11,7 @@ class PurchaseAddress
     validates :first_address_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :second_address
     validates :third_address
-    validates :telephone,               format: { with: /\A\d{11}\z/ }
+    validates :telephone,               format: { with: /\A\d{10,11}\z/ }
   end
 
   def save
